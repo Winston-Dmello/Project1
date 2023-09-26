@@ -42,6 +42,11 @@
 <form method="post">
     <button name="Submit">Submit</button>
 </form>
+{% elif Result == "Failed" %}
+<form method="post">
+  <button name="Retry">Retry</button>
+</form>
+{% endif %}
 {% endif %}
 </div>
 {% endblock %}
