@@ -13,6 +13,11 @@ Result = "Null"
 @views.route('/home', methods=["POST", "GET"])
 @login_required
 def home():
+    Lives = Active_Users.query.filter_by(Username = current_user.Username).first().Lives
+    if Lives > 0:
+        Alive = "True"
+    else:
+        Alive = "False"
     Progress = Active_Users.query.filter_by(Username = current_user.Username).first().Progress
     if request.method == "POST":
         if 'Puz1' in request.form:
@@ -23,12 +28,21 @@ def home():
             return redirect(url_for('views.Puz3'))
         elif 'Puz4' in request.form:
             return redirect(url_for('views.Puz4'))
-    return render_template("Base.html", Username = current_user.Username, Progress = Progress)
+        elif 'Retry' in request.form:
+            user = Active_Users.query.get(Username = current_user.Username).first()
+            if user:
+                db.session.delete(user)
+                db.session.commit()
+                flash('You can use the Same Username and go Again!', category="success")
+                return redirect(url_for('auth.Logout'))
+            else:
+                flash('Nothing is happening cause User Not Found!', category="error")
+    return render_template("Base.html", Username = current_user.Username, Progress = Progress, Alive = Alive)
 
 @views.route('/Puz1', methods=["POST", "GET"])
 @login_required
 def Puz1():
-    
+    Alive = True
     global Guesses, Result
     Result = "Null"
     Guesses = []
@@ -55,7 +69,8 @@ def Puz1():
                 db.session.commit()
                 return redirect(url_for('views.home'))
         elif "Try" in request.form:
-            if wordle_data['attempts'] >= 5 and Result == "Null":
+            wordle_data['attempts'] += 1
+            if wordle_data['attempts'] >= 7 and Result == "Null":
                 words = wordle_data['word']
                 flash(f"Failure! The Word was {words}", category="error")
                 Result = "Failed"
@@ -65,9 +80,8 @@ def Puz1():
                     db.session.commit()
                 session.pop(f'wordle_data {Username}')
             else:
-                wordle_data['attempts'] += 1
                 Guess = request.form.get("Guess")
-                Guess = Guess.lower()
+                Guess = Guess.upper()
                 if len(Guess) < 5 or len(Guess) > 5 or not Guess.isalpha() or not Puzzle1.is_valid_word(Guess):
                     flash("Incorrect Input Type or Not a Valid Word", category="error")
                     wordle_data['attempts'] -= 1
