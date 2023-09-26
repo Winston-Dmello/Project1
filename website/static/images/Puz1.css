@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   background-color:#1b1b1b;
-  background-image:url('puz1bg.png');
+  background-image:url('rock.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -25,6 +25,7 @@
 h4{
     font-family:sans-serif;
     color:whitesmoke;
+    font-weight: bold;
 }
     /* Define the grid container */
     .label-grid {
@@ -76,13 +77,15 @@ position: relative;
 #parent  #input-field input{
 height: 100%;
 width: 100%;
-
 font-size:1.4vw;
 border: none;
-border-bottom: 2px solid grey;
+border-bottom: 2px solid rgb(192, 192, 192);
 background:none;
-caret-color: grey;
-color:whitesmoke;
+caret-color: rgb(192, 192, 192);
+color:white;
+}
+::placeholder{
+  color: rgb(192, 192, 192);
 }
 #input-field input:focus {
 outline: none;
@@ -90,9 +93,17 @@ outline: none;
 
 .Check{
 padding: 0.5vw;
-border: 1px solid whitesmoke;
+border: 1px solid black;
 font-size:1.3vw;
-background-color: seagreen;
+background-color: #89cc16;
 border-radius: 5px;
 margin-top: 1.6vw;
+font-weight: bold;
+}
+.submit{
+  padding: 0.5vw;
+  font-size:1.3vw;
+  background-color: #6f9e1d;
+  border-radius: 5px;
+  margin-top: 1.6vw;
 }
