@@ -40,7 +40,7 @@ def Puz1():
     wordle_data = session.get(f'wordle_data {Username}', {
         'guesses': [],
         'attempts': 0,
-        'word': Puzzle1.generate_random_word(),
+        'word': Puzzle1.generate_random_word().upper(),
         'feedback': "",
         'guess_result': [],
         'result': "Null"
@@ -67,7 +67,7 @@ def Puz1():
             else:
                 wordle_data['attempts'] += 1
                 Guess = request.form.get("Guess")
-                Guess = Guess.lower()
+                Guess = Guess.upper()
                 if len(Guess) < 5 or len(Guess) > 5 or not Guess.isalpha() or not Puzzle1.is_valid_word(Guess):
                     flash("Incorrect Input Type or Not a Valid Word", category="error")
                     wordle_data['attempts'] -= 1
