@@ -15,5 +15,6 @@ class Active_Users(db.Model, UserMixin):
     Username = db.Column(db.String(100), unique=True)
     Progress = db.Column(db.Integer, default=0)
     Lives = db.Column(db.Integer, default=5)
+    Attempts = db.Column(db.Integer, default=5)
     Start_Time = db.Column(db.DateTime(timezone=True), default=func.now())
     
