@@ -1,0 +1,61 @@
+{% extends "Base.html" %}
+
+{% block title %}RenaissanceEra{% endblock %}
+{% block Head %}
+<style>
+    .block{
+        width: 75%;
+        height: 75%;
+        border: 1px solid whitesmoke;
+        border-radius: 13px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        transform: translate(-50%,-50%);
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color:white;
+        /*opacity: 0.7;*/
+        box-shadow: -10px -10px 10px;
+      }
+</style>
+{% endblock %}
+{% block content %}
+<div class="block">
+<h1>Welcome {{Username}}, To the Renaissance Era</h1>
+
+<h3>Generate a Magic Square, where sum is {{Num[1]}}<br>Given Numbers: 
+{% for i in Num[0] %}
+{{i}} {% endfor %}</h3>
+{% if Result == "Null"%}
+<form method="post">
+<table>
+    <tr>
+        <td><input type="text" name="textbox_00"></td>
+        <td><input type="text" name="textbox_01" id="texbox_01"></td>
+        <td><input type="text" name="textbox_02" id="texbox_02"></td>
+    </tr>
+    <tr>
+        <td><input type="text" name="textbox_10" id="texbox_10"></td>
+        <td><input type="text" name="textbox_11" id="texbox_11"></td>
+        <td><input type="text" name="textbox_12" id="texbox_12"></td>
+    </tr>
+    <tr>
+        <td><input type="text" name="textbox_20" id="texbox_20"></td>
+        <td><input type="text" name="textbox_21" id="texbox_21"></td>
+        <td><input type="text" name="textbox_22" id="texbox_22"></td>
+    </tr>
+</table>
+
+<button name="Try">Try</button>
+</form>
+{% elif Result == "Success" %}
+<form method="post">
+    <button name="Submit">Submit</button>
+</form>
+{% endif %}
+</div>
+{% endblock %}

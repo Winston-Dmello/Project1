@@ -1,0 +1,79 @@
+body {
+    background-image: url('road.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  @media (min-width: 768px){
+    body{
+      background-position: center top;
+    }
+  }
+  
+  @media (max-width: 767px){
+    body{
+      background-position: center center;
+    }
+  }
+  
+  .block{
+    display: flex;
+    flex-direction: column;
+  }
+  button{
+    background:transparent;
+    border: none;
+    padding:0;
+    cursor: pointer;
+    position:fixed;
+    transition: transform 0.3s;
+  }
+  
+  button:hover{
+    transform: scale(1.1);
+  }
+  
+  .pyramid-img{
+    width: 180px;
+    height: 105px;
+  }
+  .pyramid-button{
+    top:440px;
+    left:255px;
+  }
+  
+  .ooga-img{
+    width: 130px;
+    height: 115px;
+  }
+  .ooga-button{
+    top:530px;
+    right:230px;
+  }
+  
+  .mona-img{
+    width: 160px;
+    height: 160px;
+  }
+  .mona-button{
+   top: 330px;
+   right: 300px;
+  }
+  
+  .building-img{
+    width:180px;
+    height:220px;
+  }
+  .building-button{
+    top:150px;
+    left: 410px;
+  }
+  
+  .hole-img{
+   width: 230px;
+   height: 200px;
+  }
+  .hole-button{
+    top:-7px;
+    right: 300px;
+  }

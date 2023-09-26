@@ -1,0 +1,58 @@
+{% extends "Base.html" %}
+
+{% block Head %}
+<style>
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    /* Style for the textbox */
+    input[type="text"] {
+        width: 200px;
+        padding: 5px;
+    }
+    .block{
+        width: 75%;
+        height: 75%;
+        border: 1px solid whitesmoke;
+        border-radius: 13px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        transform: translate(-50%,-50%);
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color:white;
+        /*opacity: 0.7;*/
+        box-shadow: -10px -10px 10px;
+      }
+</style>
+{% endblock %}
+
+{% block title %}PyramidEra{% endblock %}
+
+{% block content %}
+<div class="block">
+<h1>Welcome {{Username}}, To the Pyramid Era</h1>
+<form method="post">
+{% for num in nums %}
+<label for="label1">{{num}}</label>
+{% endfor %}
+
+
+<input type="text" name="Guess">
+{% if Result == "Null"%}
+    <button name = "Try">Try</button>
+{% elif Result == "Success" %}
+    <button name="Submit">Submit</button>
+{% endif %}
+
+
+</form>
+</div>
+{% endblock %}

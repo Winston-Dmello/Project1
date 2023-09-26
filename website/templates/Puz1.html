@@ -1,0 +1,92 @@
+{% extends "Base.html" %}
+
+{% block Head %}
+
+<style>
+    .block{
+      width: 75%;
+      height: 75%;
+      border: 1px solid whitesmoke;
+      border-radius: 13px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
+      flex-direction: column;
+      transform: translate(-50%,-50%);
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      background-color:#353935;
+      opacity: 0.7;
+      box-shadow: -10px -10px 10px;
+    }
+        /* Define the grid container */
+        .label-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            gap: 10px; /* Spacing between labels */
+        }
+        
+        /* Style for individual labels (boxes) */
+        .label-box {
+          border: 1px solid #000; /* Minimal border */
+          padding: 10px; /* Padding inside each label */
+          text-align: center; /* Center text */
+          font: bold;
+          background-color: white;
+      }
+        .label-box-green {
+            border: 1px solid #000; /* Minimal border */
+            padding: 10px; /* Padding inside each label */
+            text-align: center; /* Center text */
+            background-color: green;
+            font: bold;
+        }
+        .label-box-yellow {
+          border: 1px solid #000; /* Minimal border */
+          padding: 10px; /* Padding inside each label */
+          text-align: center; /* Center text */
+          background-color: yellow;
+          font: bold;
+      }
+  </style>
+{% endblock %}
+{% block title %}CaveManEra{% endblock %}
+
+{% block content %}
+<div class="block">
+<h4>Welcome {{Username}}!</h4>
+
+
+    <!-- Grid container for labels -->
+    <div class="label-grid"> 
+      {% for guess in Guesses %}
+            {% for letter in guess %}
+                {% if letter.1 == '*' %}
+                <div class="label-box-green" >{{ letter.0 }}</div>
+                {% elif letter.1 == 'x' %}
+                <div class="label-box-yellow" >{{ letter.0 }}</div>
+                {% elif letter.1 == '_' %}
+                <div class="label-box" >{{ letter.0 }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+{% if Result == "Null" %}
+<form method="post">
+    <input type="text" name="Guess">
+    <button name="Try">Try</button>
+</form>
+{% elif Result == "Success"%}
+<form method="post">
+    <button name="Submit">Submit</button>
+</form>
+{% elif Result == "Failed" %}
+<form method="post">
+  <button name="Back">Back</button>
+</form>
+{% endif %}
+</div>
+{% endblock %}
