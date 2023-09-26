@@ -55,17 +55,22 @@ def Puz1():
                 db.session.commit()
                 return redirect(url_for('views.home'))
         elif "Try" in request.form:
-            wordle_data['attempts'] += 1
-            if wordle_data['attempts'] > 6:
+            if wordle_data['attempts'] >= 5 and Result == "Null":
                 words = wordle_data['word']
                 flash(f"Failure! The Word was {words}", category="error")
                 Result = "Failed"
+                user = Active_Users.query.filter_by(Username=Username).first()
+                if user:
+                    user.Lives -= 1
+                    db.session.commit()
                 session.pop(f'wordle_data {Username}')
             else:
+                wordle_data['attempts'] += 1
                 Guess = request.form.get("Guess")
                 Guess = Guess.lower()
                 if len(Guess) < 5 or len(Guess) > 5 or not Guess.isalpha() or not Puzzle1.is_valid_word(Guess):
                     flash("Incorrect Input Type or Not a Valid Word", category="error")
+                    wordle_data['attempts'] -= 1
                 else:
                     wordle_data['feedback'] = Puzzle1.play_wordle(wordle_data['word'], Guess)
                     wordle_data['guess_result'] = [(i, j) for i, j in zip(Guess, wordle_data['feedback'])]
@@ -77,8 +82,8 @@ def Puz1():
                         Result = "Success"
                         session.pop(f'wordle_data {Username}')
 
-                    Guesses = wordle_data['guesses']
-                    session[f'wordle_data {Username}'] = wordle_data
+                Guesses = wordle_data['guesses']
+                session[f'wordle_data {Username}'] = wordle_data
         elif "Back" in request.form:
             session.pop(f'wordle_data {Username}')
             return redirect(url_for('views.home'))
@@ -95,7 +100,8 @@ def Puz2():
     if user_data is None:
         # Generate the puzzle if it hasn't been generated yet
         user_data = {
-            'series': Puzzle2.generate_modified_series()
+            'series': Puzzle2.generate_modified_series(),
+            'attempts': 5
         }
         session[f'numpat_data {Username}'] = user_data
 
@@ -108,10 +114,29 @@ def Puz2():
                 db.session.commit()
                 return redirect(url_for('views.home'))
         elif "Try" in request.form:
-            Guess = int(request.form.get("Guess"))
-            ans = user_data['series'][5]
-            if Guess == ans:
-                Result = "Success"
+            user_data['attempts'] += 1
+            if user_data['attempts'] > 6:
+                Num = user_data['series'][5]
+                flash(f"Failure! The Number was {Num}", category="error")
+                Result = "Failed"
+                user = Active_Users.query.filter_by(Username=Username).first()
+                if user:
+                    user.Lives -= 1
+                    db.session.commit()
+                session.pop(f'numpat_data {Username}')
+
+            Guesss = request.form.get("Guess")
+            if len(Guesss)<1 or not Guesss.isdigit():
+                flash('Wrong Input Format!', category="error")
+                user_data['attempts'] -= 1
+            else:
+                Guess = int(Guesss)
+                ans = user_data['series'][5]
+                
+                if Guess == ans:
+                    Result = "Success"
+            
+            
     Guesses = user_data['series'][:5]
     return render_template("Puz2.html", Username = Username,nums = Guesses, Result = Result)
 
@@ -126,7 +151,8 @@ def Puz3():
     if usr_data is None:
         # Generate the puzzle if it hasn't been generated yet
         usr_data = {
-            'series': Puzzle3.generate_magic_square()
+            'series': Puzzle3.generate_magic_square(),
+            'attempts': 0
         }
         session[f'mgcsqr_data {Username}'] = usr_data
     Guesses = usr_data['series']
@@ -140,6 +166,7 @@ def Puz3():
                 return redirect(url_for('views.home'))
         
         elif "Try" in request.form:
+            usr_data['attempts']+=1
             Guess = []
             names = "textbox_"
             for i in range(3):
@@ -151,6 +178,7 @@ def Puz3():
                     except ValueError:
                         flash(f'Input not valid', category="error")
                         return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result)
+                        
                 Guess+=row
             if Puzzle3.check_invalid(Guesses[0], Guess):
                 flash('Input not in specified manner!', category="error")
