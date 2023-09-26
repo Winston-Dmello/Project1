@@ -1,0 +1,6 @@
+list of required Libraries
+
+1)Flask
+2)flask_login
+3)flask_sqlalchemy
+4)pyenchant
