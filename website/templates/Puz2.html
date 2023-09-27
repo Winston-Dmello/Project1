@@ -1,58 +1,44 @@
 {% extends "Base.html" %}
 
 {% block Head %}
-<style>
-    label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: bold;
-    }
+<link rel="stylesheet" href="{{ url_for('static', filename='images/Puz2.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;300;500;600&family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    /* Style for the textbox */
-    input[type="text"] {
-        width: 200px;
-        padding: 5px;
-    }
-    .block{
-        width: 75%;
-        height: 75%;
-        border: 1px solid whitesmoke;
-        border-radius: 13px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: flex;
-        flex-direction: column;
-        transform: translate(-50%,-50%);
-        padding: 10px;
-        justify-content: center;
-        align-items: center;
-        background-color:white;
-        /*opacity: 0.7;*/
-        box-shadow: -10px -10px 10px;
-      }
-</style>
 {% endblock %}
 
 {% block title %}PyramidEra{% endblock %}
 
 {% block content %}
 <div class="block">
-<h1>Welcome {{Username}}, To the Pyramid Era</h1>
+
+    <div id="heading">
+     <h3><u>The Pyramid Age : NUMBER PATTERNS</u></h3>
+     <h5>Find the next number of the sequence:</h5>
+    </div>
 <form method="post">
 {% for num in nums %}
 <label for="label1">{{num}}</label>
 {% endfor %}
 
 
-<input type="text" name="Guess">
+    
+
 {% if Result == "Null"%}
-    <button name = "Try">Try</button>
+<div id="parent">
+    <input type="text" placeholder="Answer" name="Guess" id="text-box">
+</div>
+    <button name = "Try" class="Check">Check</button>
+    <br>
+    <h5>You have {{attempts}} attempts remaining.</h5>
 {% elif Result == "Success" %}
-    <button name="Submit">Submit</button>
+    <button name="Submit" class="submit">Submit</button>
+{% elif Result == "Failed" %}
+<form method="post">
+  <button name="Retry" class="submit">Retry</button>
+</form>
 {% endif %}
-
-
 </form>
 </div>
 {% endblock %}
