@@ -1,8 +1,11 @@
 from flask import Blueprint, render_template, session, request, redirect, url_for, flash
 from flask_login import current_user, login_required
 from .models import Active_Users, Winners
+from sqlalchemy.sql import func, text, cast
+from sqlalchemy.types import Float
 from . import *
-from .Puzzles import Puzzle1, Puzzle2, Puzzle3, Puzzle4
+from datetime import datetime, timedelta
+from .Puzzles import Puzzle1, Puzzle2, Puzzle3, Puzzle4, MinSec
 views = Blueprint('views', __name__)
 
 #Puzzle 1 variables
@@ -13,6 +16,7 @@ Result = "Null"
 @views.route('/home', methods=["POST", "GET"])
 @login_required
 def home():
+    session.clear()
     Lives = Active_Users.query.filter_by(Username = current_user.Username).first().Lives
     if Lives > 0:
         Alive = "True"
@@ -28,6 +32,8 @@ def home():
             return redirect(url_for('views.Puz3'))
         elif 'Puz4' in request.form:
             return redirect(url_for('views.Puz4'))
+        elif 'Victory' in request.form:
+            return redirect(url_for('views.Victory'))
         elif 'Retry' in request.form:
             user = Active_Users.query.get(Username = current_user.Username).first()
             if user:
@@ -49,8 +55,8 @@ def Puz1():
     # Initialize wordle_data from the session if it exists
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 0:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 0:
+    #    return redirect(url_for('views.home'))
     wordle_data = session.get(f'wordle_data {Username}', {
         'guesses': [],
         'word': Puzzle1.generate_random_word().upper(),
@@ -113,8 +119,8 @@ def Puz2():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 1:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 1:
+    #    return redirect(url_for('views.home'))
     user_data = session.get(f'numpat_data {Username}')
 
     if user_data is None:
@@ -170,8 +176,8 @@ def Puz3():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 2:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 2:
+    #    return redirect(url_for('views.home'))
     usr_data = session.get(f'mgcsqr_data {Username}')
 
     if usr_data is None:
@@ -244,8 +250,8 @@ def Puz4():
     Username = current_user.Username
     usr_data = session.get(f'anagram_data {Username}')
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 3:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 3:
+    #    return redirect(url_for('views.home'))
     if usr_data is None:
         # Generate the puzzle if it hasn't been generated yet
         usr_data = {
@@ -288,3 +294,35 @@ def Puz4():
         session.pop(f'anagram_data {Username}')
         return render_template("Puz4.html", Username=Username, Word=Word, Result=Result,Hint = Hint, attempts = User.Attempts)
     return render_template("Puz4.html", Username = Username, Word = Word, Result = Result, Hint = Hint, attempts = User.Attempts)
+
+@views.route('/Victory', methods=["POST", "GET"])
+@login_required
+def Victory():
+
+    Username = current_user.Username
+    Winner = Winners.query.filter_by(Username=Username).first()
+    User = Active_Users.query.filter_by(Username=Username).first()
+    #if User.Progress != 4:
+    #    return redirect(url_for('views.home'))
+    if not Winner:
+
+        time_taken_expr = func.strftime('%s', func.now()) - func.strftime('%s', User.Start_Time)
+        
+
+        Winner = Winners(
+            Username=User.Username,
+            Time_Taken=time_taken_expr
+        )
+        db.session.delete(User)
+        db.session.add(Winner)
+        db.session.commit()
+    Winner = Winners.query.filter_by(Username = Username).first()
+    Winner.Time_Taken = MinSec.Calcu(Winner.Time_Taken)
+    db.session.commit()
+    top_winners = Winners.query.order_by(Winners.Time_Taken.asc())
+    user_rank = top_winners.filter_by(Username=Username).count()
+
+    # Get the top 10 winners
+    top_10_winners = top_winners.limit(10).all()
+
+    return render_template("Victory.html", Winner=Winner, Rank=user_rank, TopWinners=top_10_winners)

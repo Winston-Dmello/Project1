@@ -5,9 +5,11 @@ from .Puzzles import Puzzle1
 
 class Winners(db.Model):
     __tablename__ = 'winners'
+
     id = db.Column(db.Integer, primary_key=True)
-    Username = db.Column(db.String(100), unique=True)
-    Time_Taken = db.Column(db.DateTime(timezone=True))
+    Username = db.Column(db.String(100), unique=True, nullable=False)  # Assuming usernames are unique
+    Time_Taken = db.Column(db.String(8), nullable=False)  # Store the time taken in seconds
+
 
 class Active_Users(db.Model, UserMixin):
     __tablename__ = 'active_users'

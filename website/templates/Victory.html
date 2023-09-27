@@ -1,1 +1,35 @@
-<h1>You Have Won</h1>
+{% extends "Base.html" %}
+
+{% block Head %}
+
+{% endblock %}
+{% block content %}
+You have placed #{{Rank}}
+<br>
+Username = {{Winner.Username}}
+Time Taken = {{Winner.Time_Taken}}
+<br>
+{% if TopWinners %}
+<h1>Top 10 Rank List</h1><br>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set count=1 %}
+        {% for User in TopWinners %}
+        <tr>
+            <td>{{ count }}</td>
+            <td>{{ User.Username }}</td>
+            <td>{{ User.Time_Taken }}</td>
+        </tr>
+        {% set count = count + 1 %}
+        {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+{% endblock %}
