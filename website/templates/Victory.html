@@ -20,14 +20,12 @@ Time Taken = {{Winner.Time_Taken}}
         </tr>
     </thead>
     <tbody>
-        {% set count=1 %}
         {% for User in TopWinners %}
         <tr>
-            <td>{{ count }}</td>
+            <td>{{ loop.index0 + 1 }}</td>
             <td>{{ User.Username }}</td>
             <td>{{ User.Time_Taken }}</td>
         </tr>
-        {% set count = count + 1 %}
         {% endfor %}
     </tbody>
   </table>

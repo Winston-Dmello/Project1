@@ -24,30 +24,14 @@
       
         
         {% block content %}
-        
-        <form method="post">
         <div class="block">
-            <button class="pyramid-button" name="Puz2">
-              <img class="pyramid-img" src="{{ url_for('static', filename='Base/Pyramid1.png') }}">
-            </button>
-          
-            <button class="ooga-button" name="Puz1">
-              <img class="ooga-img" src="{{ url_for('static', filename='Base/ooga1.png') }}">
-            </button>
-          
-            <button class="mona-button" name="Puz3">
-              <img class="mona-img" src="{{ url_for('static', filename='Base/monalisa1.png') }}">
-            </button>
-          
-            <button class="building-button" name="Puz4">
-              <img src="{{ url_for('static', filename='Base/building1.png') }}" alt="Modern" class="building-img">
-            </button>
-          
-            <button class="hole-button" name="Victory">
-              <img src="{{ url_for('static', filename='Base/hole2.png') }}" alt="Blackhole" class="hole-img">
-            </button>
-          </div>
-          </form>
+            <div class="video-background">
+                <video autoplay muted>
+                    <source src="{{ url_for('static', filename='Base/video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>    
+        </div>
         {% endblock %}
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -70,6 +54,25 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        <div class="table-container">
+            <table>
+                <tbody>
+                    {% if Lives %}
+                    {% for Live in range(Lives) %}
+                    <tr>
+                        <td>
+                            <img class="Lives" src="{{ url_for('static', filename='Base/Lives.png') }}">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

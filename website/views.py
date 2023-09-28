@@ -17,33 +17,21 @@ Result = "Null"
 @login_required
 def home():
     session.clear()
-    Lives = Active_Users.query.filter_by(Username = current_user.Username).first().Lives
-    if Lives > 0:
-        Alive = "True"
-    else:
-        Alive = "False"
-    Progress = Active_Users.query.filter_by(Username = current_user.Username).first().Progress
-    if request.method == "POST":
-        if 'Puz1' in request.form:
-            return redirect(url_for('views.Puz1'))
-        elif 'Puz2' in request.form:
-            return redirect(url_for('views.Puz2'))
-        elif 'Puz3' in request.form:
-            return redirect(url_for('views.Puz3'))
-        elif 'Puz4' in request.form:
-            return redirect(url_for('views.Puz4'))
-        elif 'Victory' in request.form:
-            return redirect(url_for('views.Victory'))
-        elif 'Retry' in request.form:
-            user = Active_Users.query.get(Username = current_user.Username).first()
-            if user:
-                db.session.delete(user)
-                db.session.commit()
-                flash('You can use the Same Username and go Again!', category="success")
-                return redirect(url_for('auth.Logout'))
-            else:
-                flash('Nothing is happening cause User Not Found!', category="error")
-    return render_template("Base.html", Username = current_user.Username, Progress = Progress, Alive = Alive)
+    Username = current_user.Username
+    User = Active_Users.query.filter_by(Username = Username).first()
+    if User.Progress in [0, 1, 3, 4, 6, 7, 9, 10, 12, 13]:
+        return redirect(url_for('scenes.scene'))
+    elif User.Progress == 2:
+        return redirect(url_for('views.Puz1'))
+    elif User.Progress == 5:
+        return redirect(url_for('views.Puz2'))
+    elif User.Progress == 8:
+        return redirect(url_for('views.Puz3'))
+    elif User.Progress == 11:
+        return redirect(url_for('views.Puz4'))
+    elif User.Progress == 14:
+        return redirect(url_for('views.Victory'))
+    return render_template("Base.html", Username = current_user.Username, Progress = User.Progress, Lives=User.Lives)
 
 @views.route('/Puz1', methods=["POST", "GET"])
 @login_required
@@ -55,8 +43,8 @@ def Puz1():
     # Initialize wordle_data from the session if it exists
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 0:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 2:
+        return redirect(url_for('views.home'))
     wordle_data = session.get(f'wordle_data {Username}', {
         'guesses': [],
         'word': Puzzle1.generate_random_word().upper(),
@@ -108,8 +96,8 @@ def Puz1():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'wordle_data {Username}')
-        return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result)
-    return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result)
+        return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result, Lives=User.Lives)
+    return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result, Lives=User.Lives)
 
 @views.route('/Puz2', methods=["POST", "GET"])
 @login_required
@@ -119,8 +107,8 @@ def Puz2():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 1:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 5:
+        return redirect(url_for('views.home'))
     user_data = session.get(f'numpat_data {Username}')
 
     if user_data is None:
@@ -166,8 +154,8 @@ def Puz2():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'numpat_data {Username}')
-        return render_template("Puz2.html", Username=Username, Guesses=Guesses, Result=Result, attempts = User.Attempts)
-    return render_template("Puz2.html", Username = Username,nums = Guesses, Result = Result, attempts=User.Attempts)
+        return render_template("Puz2.html", Username=Username, Guesses=Guesses, Result=Result, attempts = User.Attempts, Lives=User.Lives)
+    return render_template("Puz2.html", Username = Username,nums = Guesses, Result = Result, attempts=User.Attempts, Lives=User.Lives)
 
 @views.route('/Puz3', methods=["POST", "GET"])
 @login_required
@@ -176,8 +164,8 @@ def Puz3():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 2:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 8:
+        return redirect(url_for('views.home'))
     usr_data = session.get(f'mgcsqr_data {Username}')
 
     if usr_data is None:
@@ -212,14 +200,14 @@ def Puz3():
                         flash(f'Input not valid', category="error")
                         User.Attempts += 1
                         db.session.commit()
-                        return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result)
+                        return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result, Lives=User.Lives)
                         
                 Guess+=row
             if Puzzle3.check_invalid(Guesses[0], Guess):
                 flash('Input not in specified manner!', category="error")
                 User.Attempts += 1
                 db.session.commit()
-                return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result)
+                return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result, Lives=User.Lives)
             else:
                 ans = usr_data['series'][1]
                 if Puzzle3.check_magic_sq([Guess,ans]):
@@ -239,8 +227,8 @@ def Puz3():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'mgcsqr_data {Username}')
-        return render_template("Puz3.html", Username=Username, Num=Guesses, Result=Result, attempts = User.Attempts)    
-    return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result, Attempts = User.Attempts)
+        return render_template("Puz3.html", Username=Username, Num=Guesses, Result=Result, attempts = User.Attempts, Lives=User.Lives)    
+    return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result, Attempts = User.Attempts, Lives=User.Lives)
 
 @views.route('/Puz4', methods=["POST", "GET"])
 @login_required
@@ -250,8 +238,8 @@ def Puz4():
     Username = current_user.Username
     usr_data = session.get(f'anagram_data {Username}')
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 3:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 11:
+        return redirect(url_for('views.home'))
     if usr_data is None:
         # Generate the puzzle if it hasn't been generated yet
         usr_data = {
@@ -292,18 +280,17 @@ def Puz4():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'anagram_data {Username}')
-        return render_template("Puz4.html", Username=Username, Word=Word, Result=Result,Hint = Hint, attempts = User.Attempts)
-    return render_template("Puz4.html", Username = Username, Word = Word, Result = Result, Hint = Hint, attempts = User.Attempts)
+        return render_template("Puz4.html", Username=Username, Word=Word, Result=Result,Hint = Hint, attempts = User.Attempts, Lives=User.Lives)
+    return render_template("Puz4.html", Username = Username, Word = Word, Result = Result, Hint = Hint, attempts = User.Attempts, Lives=User.Lives)
 
 @views.route('/Victory', methods=["POST", "GET"])
-@login_required
 def Victory():
 
     Username = current_user.Username
     Winner = Winners.query.filter_by(Username=Username).first()
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 4:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 14:
+        return redirect(url_for('views.home'))
     if not Winner:
 
         time_taken_expr = func.strftime('%s', func.now()) - func.strftime('%s', User.Start_Time)
@@ -320,7 +307,11 @@ def Victory():
     Winner.Time_Taken = MinSec.Calcu(Winner.Time_Taken)
     db.session.commit()
     top_winners = Winners.query.order_by(Winners.Time_Taken.asc())
-    user_rank = top_winners.filter_by(Username=Username).count()
+    index = 0
+    for record in top_winners:
+        if record.Username == Username:
+            break
+    user_rank = index
 
     # Get the top 10 winners
     top_10_winners = top_winners.limit(10).all()
