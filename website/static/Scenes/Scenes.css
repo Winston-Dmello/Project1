@@ -1,0 +1,54 @@
+.video-background {
+    position: relative; /* Set the video container to relative position */
+}
+
+/* Style the video to cover the entire container */
+video {
+    width: 100%; /* Make the video cover the entire container */
+    height: auto; /* Maintain the video's aspect ratio */
+    object-fit: cover; /* Cover the entire container with the video */
+}
+
+.button {
+    position: absolute; /* Position the button absolutely within the container */
+    bottom: 10px; /* Adjust the distance from the bottom */
+    right: 10px; /* Adjust the distance from the right */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+.button-prev {
+    position: absolute; /* Position the button absolutely within the container */
+    bottom: 10px; /* Adjust the distance from the bottom */
+    left: 10px; /* Adjust the distance from the left */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.block{
+    width: 85vw;
+    height: 90vh;
+    border: 1px solid whitesmoke;
+    border-radius: 13px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-50%,-50%);
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color:#1b1b1b;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: -10px -10px 10px;
+    font-size: 2vw;
+    font-family: Montserrat;
+  }

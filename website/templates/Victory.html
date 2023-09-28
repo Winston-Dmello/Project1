@@ -29,14 +29,12 @@ Time Taken : {{Winner.Time_Taken}}
         </tr>
     </thead>
     <tbody>
-        
         {% for User in TopWinners %}
         <tr>
             <td>{{ loop.index0 + 1 }}</td>
             <td>{{ User.Username }}</td>
             <td>{{ User.Time_Taken }}</td>
         </tr>
-       
         {% endfor %}
     </tbody>
   </table></div>

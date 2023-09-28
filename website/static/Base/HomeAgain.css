@@ -9,7 +9,22 @@ body {
       background-position: center top;
     }
   }
-  
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Place it behind other content */
+}
+
+/* Style the video to cover the entire container */
+video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
   @media (max-width: 767px){
     body{
       background-position: center center;
@@ -32,48 +47,20 @@ body {
   button:hover{
     transform: scale(1.1);
   }
-  
-  .pyramid-img{
-    width: 180px;
-    height: 105px;
-  }
-  .pyramid-button{
-    top:440px;
-    left:255px;
-  }
-  
-  .ooga-img{
-    width: 130px;
-    height: 115px;
-  }
-  .ooga-button{
-    top:530px;
-    right:230px;
-  }
-  
-  .mona-img{
-    width: 160px;
-    height: 160px;
-  }
-  .mona-button{
-   top: 330px;
-   right: 300px;
-  }
-  
-  .building-img{
-    width:180px;
-    height:220px;
-  }
-  .building-button{
-    top:150px;
-    left: 410px;
-  }
-  
-  .hole-img{
-   width: 230px;
-   height: 200px;
-  }
-  .hole-button{
-    top:-7px;
-    right: 300px;
+
+  .table-container{
+    opacity: 1;
+    position: absolute;
+    display: flex;
+    top: 5%;
+    right: 1.75%;
+    width: 5vw;
+    height: 90vh;
+    border-radius: 13px;
+    justify-content: center;
+  } 
+
+  .Lives{
+    height: 100%;
+    width: 100%;
   }

@@ -1,0 +1,74 @@
+{% extends "Base.html" %}
+
+{% block Head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='Scenes/Scenes.css') }}">
+{% endblock %}
+{% block title %}
+{% if Progress == 0 %}
+Scene1
+{% elif Progress == 1 %}
+Scene2
+{% elif Progress == 3 %}
+Scene3
+{% elif Progress == 4 %}
+Scene4
+{% elif Progress == 6 %}
+Scene5
+{% elif Progress == 7 %}
+Scene6
+{% elif Progress == 9 %}
+Scene7
+{% elif Progress == 10 %}
+Scene8
+{% elif Progress == 12 %}
+Scene9
+{% elif Progress == 13 %}
+Scene10
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="block">
+    <div class="video-background">
+        <video autoplay muted id="background-video" onended="showButton()">
+            {% if Progress == 0 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene1.mp4') }}" type="video/mp4">
+            {% elif Progress == 1 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene2.mp4') }}" type="video/mp4">
+            {% elif Progress == 3 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene3.mp4') }}" type="video/mp4">
+            {% elif Progress == 4 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene4.mp4') }}" type="video/mp4">
+            {% elif Progress == 6 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene5.mp4') }}" type="video/mp4">
+            {% elif Progress == 7 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene6.mp4') }}" type="video/mp4">
+            {% elif Progress == 9 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene7.mp4') }}" type="video/mp4">
+            {% elif Progress == 10 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene8.mp4') }}" type="video/mp4">
+            {% elif Progress == 12 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene9.mp4') }}" type="video/mp4">
+            {% elif Progress == 13 %}
+            <source src="{{ url_for('static', filename='Scenes/Scene10.mp4') }}" type="video/mp4">
+            {% endif %}
+            
+            Your browser does not support the video tag.
+        </video>
+        <form method="Post">
+            <button class="button" name="Next" id="play-button" style="display: none;">Next</button>
+            {% if Progress in [1,4,7,10,13] %}
+            <button class="button-prev" name="Prev" id="prev-button" style="display: none;">Prev</button>
+            {% endif %}
+        </form>
+    </div>        
+</div>
+<script>
+    function showButton() {
+        const playButton = document.getElementById('play-button');
+        playButton.style.display = 'block';
+        const prevButton = document.getElementById('prev-button');
+        prevButton.style.display = 'block';
+    }
+</script>
+{% endblock %}

@@ -1,5 +1,4 @@
 def Calcu(val):
-   
     try:
         seconds = int(val)
     except:
