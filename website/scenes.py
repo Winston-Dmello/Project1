@@ -21,3 +21,12 @@ def scene():
         return redirect(url_for('views.home'))
     return render_template("Scene.html", Progress = User.Progress, Username = Username, Lives=User.Lives)
 
+@scenes.route('/Failed', methods=["GET", "POST"])
+@login_required
+def endgame():
+    Username = current_user.Username
+    User = Active_Users.query.filter_by(Username = Username).first()
+    Lives = User.Lives
+    if request.method == "POST":
+        return redirect(url_for('auth.Logout'))
+    return render_template("GameOver.html", Username = Username, Lives = Lives)

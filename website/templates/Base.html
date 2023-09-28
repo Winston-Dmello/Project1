@@ -58,13 +58,11 @@
             <table>
                 <tbody>
                     {% if Lives %}
-                    {% for Live in range(Lives) %}
                     <tr>
-                        <td>
-                            <img class="Lives" src="{{ url_for('static', filename='Base/Lives.png') }}">
+                        <td style="vertical-align: bottom;">
+                            <img class="Lives" src="{{ url_for('static', filename='Base/Lives.png') }}">x{{Lives}} 
                         </td>
                     </tr>
-                    {% endfor %}
                     {% endif %}
                 </tbody>
             </table>

@@ -57,10 +57,15 @@ video {
     width: 5vw;
     height: 90vh;
     border-radius: 13px;
-    justify-content: center;
+    align-items:start;
+    text-align:end;
+    color: white;
+    font-size:4vh;
   } 
 
   .Lives{
-    height: 100%;
-    width: 100%;
+    width: 50%;
+    aspect-ratio: 1/1;
   }
+
+  
