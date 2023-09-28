@@ -289,8 +289,8 @@ def Victory():
     Username = current_user.Username
     Winner = Winners.query.filter_by(Username=Username).first()
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 14:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 14:
+        #return redirect(url_for('views.home'))
     if not Winner:
 
         time_taken_expr = func.strftime('%s', func.now()) - func.strftime('%s', User.Start_Time)
@@ -309,6 +309,7 @@ def Victory():
     top_winners = Winners.query.order_by(Winners.Time_Taken.asc())
     index = 0
     for record in top_winners:
+        index += 1
         if record.Username == Username:
             break
     user_rank = index
