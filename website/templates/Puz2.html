@@ -28,15 +28,22 @@
 {% if Result == "Null"%}
 <div id="parent">
     <input type="text" placeholder="Answer" name="Guess" id="text-box">
-</div>
+
     <button name = "Try" class="Check">Check</button>
     <br>
+
+</div>
+<div class="attempt">
     <h5>You have {{attempts}} attempts remaining.</h5>
+</div>
+
 {% elif Result == "Success" %}
-    <button name="Submit" class="submit">Submit</button>
+    <div class="retry"><button name="Submit" class="submit">Submit</button></div>
 {% elif Result == "Failed" %}
 <form method="post">
+  <div class="retry">  
   <button name="Retry" class="submit">Retry</button>
+</div>
 </form>
 {% endif %}
 </form>

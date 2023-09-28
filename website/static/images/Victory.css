@@ -1,0 +1,48 @@
+
+*{    
+  font-family: 'Montserrat', sans-serif;
+}
+p{
+  color: whitesmoke;
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1.2em;
+  min-width: 400px;
+  border-radius: 10px 10px ;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: black;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  border: none;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: #36454F;
+  color: #ffffff;
+}
+
+
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 3px solid #009879;
+}
+
+.table{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
