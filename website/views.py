@@ -157,7 +157,8 @@ def Puz2():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'numpat_data {Username}')
-        return redirect(url_for('views.home'))
+        if user.Lives == 0:
+            return redirect(url_for('views.home'))
     return render_template("Puz2.html", Username = Username,nums = Guesses, Result = Result, attempts=User.Attempts, Lives=User.Lives)
 
 @views.route('/Puz3', methods=["POST", "GET"])
@@ -230,7 +231,8 @@ def Puz3():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'mgcsqr_data {Username}')
-        return redirect(url_for('views.home'))    
+        if user.Lives == 0:
+            return redirect(url_for('views.home'))    
     return render_template("Puz3.html", Username = Username,Num = Guesses, Result = Result, Attempts = User.Attempts, Lives=User.Lives)
 
 @views.route('/Puz4', methods=["POST", "GET"])
@@ -283,7 +285,8 @@ def Puz4():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'anagram_data {Username}')
-        return redirect(url_for('views.home'))
+        if user.Lives == 0:
+            return redirect(url_for('views.home'))
     return render_template("Puz4.html", Username = Username, Word = Word, Result = Result, Hint = Hint, attempts = User.Attempts, Lives=User.Lives)
 
 @views.route('/Victory', methods=["POST", "GET"])

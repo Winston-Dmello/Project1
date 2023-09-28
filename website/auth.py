@@ -30,5 +30,9 @@ def Login():
 @auth.route('/Logout')
 @login_required
 def Logout():
+    Username = current_user.Username
+    User = Active_Users.query.filter_by(Username = Username).first()
+    db.session.delete(User)
+    db.session.commit()
     logout_user()
     return redirect(url_for('auth.Login'))
