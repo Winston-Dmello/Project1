@@ -21,3 +21,6 @@ def scene():
         return redirect(url_for('views.home'))
     return render_template("Scene.html", Progress = User.Progress, Username = Username, Lives=User.Lives)
 
+
+def endgame():
+    pass
