@@ -2,21 +2,30 @@
 
 {% block Head %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='images/Victory.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
 {% endblock %}
 {% block content %}
-You have placed #{{Rank}}
+<p>
+Congratulations on helping the malnourished stick guy<br>
+You have been ranked #{{Rank}}<br>
 <br>
-Username = {{Winner.Username}}
-Time Taken = {{Winner.Time_Taken}}
+Username : {{Winner.Username}}<br>
+Time Taken : {{Winner.Time_Taken}}
 <br>
+</p>
 {% if TopWinners %}
-<h1>Top 10 Rank List</h1><br>
-<table class="table table-striped">
+<h1 style="color: white;">LEADERBOARD</h1><br>
+<div class="table">
+<table class="content-table">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Username</th>
-            <th scope="col">Time</th>
+            <th scope="col"><b>Rank</b></th>
+            <th scope="col"><b>Username</b></th>
+            <th scope="col"><b>Time</b></th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +37,7 @@ Time Taken = {{Winner.Time_Taken}}
         </tr>
         {% endfor %}
     </tbody>
-  </table>
+  </table></div>
+
 {% endif %}
 {% endblock %}

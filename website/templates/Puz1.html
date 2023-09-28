@@ -5,6 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='images/Puz1.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;300;500;600&family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 {% endblock %}
 {% block title %}CaveManEra{% endblock %}
@@ -46,7 +47,7 @@
 </form>
 {% elif Result == "Failed" %}
 <form method="post">
-  <button name="Retry" class="submit">Retry</button>
+  <button name="Retry" class="retry">Retry</button>
 </form>
 {% endif %}
 </div>
