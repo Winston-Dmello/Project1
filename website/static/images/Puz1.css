@@ -23,10 +23,9 @@
 }
 
 
-h3{
-  font-family: 'Martian Mono', monospace;
+h1{
+  font-family: 'Acme', sans-serif;
   color: whitesmoke;
-  font-weight: bold;
 }
     /* Define the grid container */
     .label-grid {
@@ -169,6 +168,6 @@ font-weight: bold;
 
 /* Update the size of the scaling div content */
 .scaling-div p {
-  font-size: 1.5vw; /* Adjust the font size as needed */
+  font-size: 3vh; /* Adjust the font size as needed */
   color: whitesmoke;
 }

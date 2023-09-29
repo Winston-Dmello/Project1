@@ -13,10 +13,10 @@ video {
     position: absolute; /* Position the button absolutely within the container */
     bottom: 10px; /* Adjust the distance from the bottom */
     right: 10px; /* Adjust the distance from the right */
-    background-color: #007bff; /* Button background color */
+    border: none;
+    background-color: #89cc16;
     color: #fff; /* Button text color */
     padding: 10px 20px; /* Button padding */
-    border: none; /* Remove button border */
     cursor: pointer; /* Change cursor to pointer on hover */
     border-radius: 10px;
 }
@@ -24,10 +24,10 @@ video {
     position: absolute; /* Position the button absolutely within the container */
     bottom: 10px; /* Adjust the distance from the bottom */
     left: 10px; /* Adjust the distance from the left */
-    background-color:#007bff ; /*Button background color */
+    border:none;
+    background-color: #89cc16;
     color: #fff; /* Button text color */
     padding: 10px 20px; /* Button padding */
-    border: none; /* Remove button border */
     cursor: pointer; /* Change cursor to pointer on hover */
     border-radius: 10px;
 }

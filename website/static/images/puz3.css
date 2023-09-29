@@ -22,8 +22,11 @@
   font-family: 'Martian Mono', monospace;
 }
 
-h2,h5,h3{
+h5,h3{
   color: whitesmoke;
+}
+h1{
+  font-family: 'Acme', sans-serif;
 }
 .check{
     padding: 0.5vw;
@@ -34,6 +37,15 @@ h2,h5,h3{
     border-radius: 5px;
     margin-top: 1.6vw;
     font-weight: bold;
+}
+.submit{
+  padding: 0.5vw;
+  border: 1px solid black;
+  font-size:1.3vw;
+  background-color: #89cc16;
+  border-radius: 5px;
+  margin-top: 1.6vw;
+  font-weight: bold;
 }
 
 input{

@@ -77,10 +77,13 @@ label {
   caret-color: rgb(192, 192, 192);
   color:white;
 }*/
-h2,h3, h4, label,h5{
+ h4, label,h5{
   color: #44220f;
   font-size: 0.9vw;
   font-family: 'Martian Mono', monospace;
+}
+h1{
+  font-family: 'Acme', sans-serif;
 }
 h4{
   font-family: 'Martian Mono', monospace;
