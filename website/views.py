@@ -46,8 +46,8 @@ def Puz1():
     # Initialize wordle_data from the session if it exists
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 2:
-        #return redirect(url_for('views.home'))
+    if User.Progress != 2:
+        return redirect(url_for('views.home'))
     wordle_data = session.get(f'wordle_data {Username}', {
         'guesses': [],
         'word': Puzzle1.generate_random_word().upper(),
@@ -99,7 +99,8 @@ def Puz1():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'wordle_data {Username}')
-        #return redirect(url_for('views.home'))
+        if user.Lives == 0:
+            return redirect(url_for('views.home'))
     return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result, Lives=User.Lives)
 
 @views.route('/Puz2', methods=["POST", "GET"])
@@ -110,8 +111,8 @@ def Puz2():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 5:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 5:
+        return redirect(url_for('views.home'))
     user_data = session.get(f'numpat_data {Username}')
 
     if user_data is None:
@@ -168,8 +169,8 @@ def Puz3():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 8:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 8:
+        return redirect(url_for('views.home'))
     usr_data = session.get(f'mgcsqr_data {Username}')
 
     if usr_data is None:
@@ -243,8 +244,8 @@ def Puz4():
     Username = current_user.Username
     usr_data = session.get(f'anagram_data {Username}')
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 11:
-    #    return redirect(url_for('views.home'))
+    if User.Progress != 11:
+        return redirect(url_for('views.home'))
     if usr_data is None:
         # Generate the puzzle if it hasn't been generated yet
         usr_data = {
@@ -290,13 +291,13 @@ def Puz4():
     return render_template("Puz4.html", Username = Username, Word = Word, Result = Result, Hint = Hint, attempts = User.Attempts, Lives=User.Lives)
 
 @views.route('/Victory', methods=["POST", "GET"])
+@login_required
 def Victory():
-
     Username = current_user.Username
     Winner = Winners.query.filter_by(Username=Username).first()
     User = Active_Users.query.filter_by(Username=Username).first()
-    #if User.Progress != 14:
-        #return redirect(url_for('views.home'))
+    if User.Progress != 14:
+        return redirect(url_for('views.home'))
     if not Winner:
 
         time_taken_expr = func.strftime('%s', func.now()) - func.strftime('%s', User.Start_Time)
@@ -306,12 +307,12 @@ def Victory():
             Username=User.Username,
             Time_Taken=time_taken_expr
         )
-        db.session.delete(User)
         db.session.add(Winner)
         db.session.commit()
-    Winner = Winners.query.filter_by(Username = Username).first()
-    Winner.Time_Taken = MinSec.Calcu(Winner.Time_Taken)
-    db.session.commit()
+        Winner = Winners.query.filter_by(Username = Username).first()
+        Winner.Time_Taken = MinSec.Calcu(Winner.Time_Taken)
+        db.session.commit()
+        
     top_winners = Winners.query.order_by(Winners.Time_Taken.asc())
     index = 0
     for record in top_winners:
@@ -322,5 +323,10 @@ def Victory():
 
     # Get the top 10 winners
     top_10_winners = top_winners.limit(10).all()
+
+    if request.method == "POST":
+        db.session.delete(User)
+        db.session.commit()
+        return redirect(url_for('auth.Logout'))
 
     return render_template("Victory.html", Winner=Winner, Rank=user_rank, TopWinners=top_10_winners)

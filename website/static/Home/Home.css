@@ -48,6 +48,37 @@ body{
     height: 40vh;
   }
   
-  #start-button:hover{
-    transform: scale(2.2);
+  .start-button:hover{
+    transform: scale(1.15);
   }
+
+  #message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure it's above other content */
+}
+
+/* Style for the message content */
+#message p {
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* Media query to show the message in portrait mode */
+@media (orientation: portrait) {
+    #message {
+        display: flex;
+    }
+}
+
+  .hidden {
+    display: none;
+} 

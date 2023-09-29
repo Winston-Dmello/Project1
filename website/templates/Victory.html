@@ -1,45 +1,56 @@
-{% extends "Base.html" %}
-
-{% block Head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victory</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='images/Victory.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
 
-{% endblock %}
-{% block content %}
-<div class="text">
-    <h4 id="h4">Congratulations <bold>{{Winner.Username}}</bold>, You have been ranked <bold>#{{Rank}}</bold>  
-    <br>
-    Your Time: {{Winner.Time_Taken}}
-    <br>
-    <br>
-    <br>
-    </h4>
-    {% if TopWinners %}
-    <h1 style="color: white;">LEADERBOARD</h1>
-</div>
-<div class="table">
-<table class="content-table">
-    <thead>
-        <tr>
-            <th scope="col"><b>Rank</b></th>
-            <th scope="col"><b>Username</b></th>
-            <th scope="col"><b>Time</b></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for User in TopWinners %}
-        <tr>
-            <td>{{ loop.index0 + 1 }}</td>
-            <td>{{ User.Username }}</td>
-            <td>{{ User.Time_Taken }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table></div>
+</head>
 
-{% endif %}
-{% endblock %}
+<body>
+    <div class="text">
+        <h4 id="h4">Congratulations <bold>{{Winner.Username}}</bold>, You have been ranked <bold>#{{Rank}}</bold>  
+        <br>
+        Your Time: {{Winner.Time_Taken}}
+        <br>
+        </h4>
+        {% if TopWinners %}
+        <h1 style="color: white;">LEADERBOARD</h1>
+    </div>
+    <div class="table">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th scope="col"><b>Rank</b></th>
+                <th scope="col"><b>Username</b></th>
+                <th scope="col"><b>Time</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for User in TopWinners %}
+            <tr>
+                <td>{{ loop.index0 + 1 }}</td>
+                <td>{{ User.Username }}</td>
+                <td>{{ User.Time_Taken }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table></div>
+    
+        <form method="post">
+            <div class="replay">
+            <button name="Replay" class="submit">Play Again</button>
+        </div>
+        </form>
+    
+    {% endif %}    
+
+</body>
+</html>
+
 

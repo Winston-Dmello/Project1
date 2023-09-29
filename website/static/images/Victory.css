@@ -56,3 +56,31 @@
   padding: 20px;
   margin-top: 5px;
 }
+
+.submit{
+  padding: 0.8vw;
+  border: 1px solid black;
+  font-size:1.5vw;
+  color: whitesmoke;
+  background-color: #4e6a7c;
+  border-radius: 13px;
+  margin-top: 1.6vw;
+  font-weight: bold;
+  transition: transform 0.4s;
+}
+.submit:hover{
+  transform: scale(1.1);
+}
+.replay{
+  display: flex;
+  width: 100%;
+  height:auto;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+body{
+  background-image: url('Base1.png');
+  background-size: cover;
+}
