@@ -12,11 +12,11 @@
 {% block content %}
 <div class="block">
 <button id="openScalingDiv2">How To Play?</button>
-<h3><u>The Renaissance Era : MAGIC SQUARE</u></h3>
+<h1 style="color: black; text-shadow: 3px 3px 3px blanchedalmond;">The Renaissance Magic Square Puzzle</h1>
 
-<h5>Generate a Magic Square, where the sum is {{Num[1]}}<br>Given Numbers: 
+<center><b><h5 style="color: black; text-shadow: 2px 2px 2px  rgb(117, 104, 104);">Magical Sum: {{Num[1]}}<br>Given Numbers: 
 {% for i in Num[0] %}
-{{i}} {% endfor %}</h5>
+{{i}} {% endfor %}</h5></b></center>
 {% if Result == "Null"%}
 <form method="post">
 <table>
@@ -44,7 +44,7 @@
   <div class="Popup">
     <div class="Message">
       <div class="msg">Congratulation!<br>You Move Forward</div>
-    <div class="sumit"><button name="Submit" class="check">Submit</button>
+    <div class="sumit"><button name="Submit" class="submit">Submit</button>
     </div>
   </div>
   </div>
@@ -54,7 +54,7 @@
   <div class="Popup">
     <div class="Message">
       <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
-  <div class="sumit"><button name="Retry" class="check">Retry</button>
+  <div class="sumit"><button name="Retry" class="submit">Retry</button>
     </div>
   </div>
   </div>
@@ -67,20 +67,19 @@
 <div class="scaling-div" id="scalingDiv2">
   <button class="close-button" id="closeScalingDiv2">Close</button>
   <p>
-"In the vibrant Renaissance Era, our brave adventurer embarks on yet another journey after a<br>
+"In the vibrant Renaissance Era, the protagonist embarks on yet another journey after a<br>
 harrowing fall into the mystical pit. Now, within a chamber adorned with the wonders of art<br>
 and knowledge, they are faced with an engaging challenge - the Renaissance Magic Square Puzzle."<br><br>
 
 <u>Rules of the Renaissance Magic Square Puzzle:</u><br><br>
-1. Amidst the Renaissance splendor, you confront the Magic Square Puzzle.<br>
-2. A 3x3 matrix is presented to you, a grid with nine cells.<br>
-3. Your task is to place the given numbers into the cells, ensuring the sum of each<br>
-row, column, and diagonal matches the specified magical sum.<br>
-4. The numbers and the magical sum are provided as clues to guide you.<br>
-5. With only 5 attempts, you must arrange the numbers within the grid to achieve<br>
-the desired magical sum.<br>
-6. Can you tap into the Renaissance spirit and master the Magic Square Puzzle in<br>
-just 5 attempts to unlock its secrets and continue your extraordinary journey?</p>
+
+1. A 3x3 matrix is presented to you, a grid with nine cells.<br>
+2. Your task is to place the given numbers into the cells,<br> ensuring the sum of each
+row, column, and diagonal matches the<br>specified magical sum.<br>
+3. The numbers and the magical sum are provided as clues to guide you.<br>
+4. With only 5 attempts, you must arrange the numbers within the grid to<br>achieve
+the desired magical sum.<br><br>
+ Can you tap into the Renaissance spirit and master the Magic Square Puzzle<br> and continue your extraordinary journey?</p>
 </div>
 
 <script>

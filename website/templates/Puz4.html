@@ -6,17 +6,22 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='images/Puz4.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;300;500;600&family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Gabarito:wght@600&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <div class="block">
 <button id="openScalingDiv3">How To Play?</button>
-<h2><b><u>The Modern Era : JUMBLED WORD</u></b></h2>
+<h1 style="color: black; text-shadow: 3px 3px 3px rgb(197, 190, 190);"><b>The Modern Era:
+  Anagram Puzzle</b></h1>
 <br>
-<h4><b>Jumbled Word: {{Word}}</b></h4>
-<br>
-<h5><b>{{Hint}}</b></h5>
+<h4 style="color: black; text-shadow: 3px 3px 3px rgb(117, 104, 104);"><b>Jumbled Word: {{Word}}</b></h4>
+
+<h5 style="color: black; text-shadow: 2px 2px 2px  rgb(117, 104, 104);"><b>Hint: {{Hint}}</b></h5>
 {% if Result == "Null" %}
 <form method="post">
     <div class="text-div">
@@ -56,18 +61,16 @@
 <div class="scaling-div" id="scalingDiv3">
   <button class="close-button" id="closeScalingDiv3">Close</button>
   <p>
-    "Exasperated by the relentless pit's whims, our resolute traveler is hurled into the Modern<br>
+    "Devastated by the relentless pit's whims, the protagonist is hurled into the Modern<br>
     Era. Amidst the bustling cityscape and technology, a new challenge awaits - the Modern Era<br>
     Anagram Puzzle."<br><br>
     
     <u>Rules of the Modern Era Anagram Puzzle:</u><br><br>
-    1. Now in the heart of the Modern Era, you confront the Anagram Puzzle.<br>
-    2. You will be given a set of letters, jumbled and disordered.<br>
-    3. Your mission is to unscramble these letters and form a meaningful word.<br>
-    4. A hint or clue will be provided to guide your deciphering.<br>
-    5. You have 5 attempts to successfully solve the anagram and unveil the word.<br>
-    6. Can you embrace modern thinking and decode the Anagram Puzzle within 5 attempts to<br>
-    continue your extraordinary journey?</p>
+    1. You will be given a set of letters, jumbled and disordered.<br>
+    2. Your mission is to unscramble these letters and form a meaningful word.<br>
+    3. A hint or clue will be provided to guide your deciphering.<br>
+    4. You have 5 attempts to successfully solve the anagram and unveil the word.<br>
+   <br>Can you embrace modern thinking and decode the Anagram Puzzle?</p>
 </div>
 
 <script>
