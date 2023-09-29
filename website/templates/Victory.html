@@ -9,16 +9,17 @@
 
 {% endblock %}
 {% block content %}
-<p>
-Congratulations on helping the malnourished stick guy<br>
-You have been ranked #{{Rank}}<br>
-<br>
-Username : {{Winner.Username}}<br>
-Time Taken : {{Winner.Time_Taken}}
-<br>
-</p>
-{% if TopWinners %}
-<h1 style="color: white;">LEADERBOARD</h1><br>
+<div class="text">
+    <h4 id="h4">Congratulations <bold>{{Winner.Username}}</bold>, You have been ranked <bold>#{{Rank}}</bold>  
+    <br>
+    Your Time: {{Winner.Time_Taken}}
+    <br>
+    <br>
+    <br>
+    </h4>
+    {% if TopWinners %}
+    <h1 style="color: white;">LEADERBOARD</h1>
+</div>
 <div class="table">
 <table class="content-table">
     <thead>
@@ -41,3 +42,4 @@ Time Taken : {{Winner.Time_Taken}}
 
 {% endif %}
 {% endblock %}
+
