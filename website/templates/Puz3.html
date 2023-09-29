@@ -11,6 +11,7 @@
 {% endblock %}
 {% block content %}
 <div class="block">
+<button id="openScalingDiv2">How To Play?</button>
 <h3><u>The Renaissance Era : MAGIC SQUARE</u></h3>
 
 <h5>Generate a Magic Square, where the sum is {{Num[1]}}<br>Given Numbers: 
@@ -40,12 +41,60 @@
 </form>
 {% elif Result == "Success" %}
 <form method="post">
-    <button name="Submit" class="check">Submit</button>
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">Congratulation!<br>You Move Forward</div>
+    <div><button name="Submit" class="check">Submit</button>
+    </div>
+  </div>
+  </div>
 </form>
 {% elif Result == "Failed" %}
 <form method="post">
-  <button name="Retry" class="check">Retry</button>
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div><button name="Retry" class="check">Retry</button>
+    </div>
+  </div>
+  </div>
 </form>
 {% endif %}
 </div>
+
+</div>
+
+<div class="scaling-div" id="scalingDiv2">
+  <button class="close-button" id="closeScalingDiv2">Close</button>
+  <p>
+"In the vibrant Renaissance Era, our brave adventurer embarks on yet another journey after a<br>
+harrowing fall into the mystical pit. Now, within a chamber adorned with the wonders of art<br>
+and knowledge, they are faced with an engaging challenge - the Renaissance Magic Square Puzzle."<br><br>
+
+<u>Rules of the Renaissance Magic Square Puzzle:</u><br><br>
+1. Amidst the Renaissance splendor, you confront the Magic Square Puzzle.<br>
+2. A 3x3 matrix is presented to you, a grid with nine cells.<br>
+3. Your task is to place the given numbers into the cells, ensuring the sum of each<br>
+row, column, and diagonal matches the specified magical sum.<br>
+4. The numbers and the magical sum are provided as clues to guide you.<br>
+5. With only 5 attempts, you must arrange the numbers within the grid to achieve<br>
+the desired magical sum.<br>
+6. Can you tap into the Renaissance spirit and master the Magic Square Puzzle in<br>
+just 5 attempts to unlock its secrets and continue your extraordinary journey?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv2");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv2");
+  const scalingDiv = document.getElementById("scalingDiv2");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}
