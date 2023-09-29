@@ -12,6 +12,7 @@
 
 {% block content %}
 <div class="block">
+<button id="openScalingDiv1">How To Play?</button> <!-- Button to open scaling div -->
 
     <div id="heading">
      <h3><u>The Pyramid Age : NUMBER PATTERNS</u></h3>
@@ -23,9 +24,26 @@
 {% endfor %}
 
 
-    
+{% if Result == "Success" %}
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">Congratulations!<br>You Move Forward</div>
+    <div class="retry"><button name="Submit" class="submit">Submit</button></div>
+  </div>
+</div>
+{% elif Result == "Failed" %}
+<form method="post">
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div class="retry">  
+  <button name="Retry" class="submit">Retry</button>
+</div>
+</div>
+</div>
+</form>  
 
-{% if Result == "Null"%}
+{% elif Result == "Null"%}
 <div id="parent">
     <input type="text" placeholder="Answer" name="Guess" id="text-box">
 
@@ -37,15 +55,42 @@
     <h5>You have {{attempts}} attempts remaining.</h5>
 </div>
 
-{% elif Result == "Success" %}
-    <div class="retry"><button name="Submit" class="submit">Submit</button></div>
-{% elif Result == "Failed" %}
-<form method="post">
-  <div class="retry">  
-  <button name="Retry" class="submit">Retry</button>
-</div>
-</form>
+
 {% endif %}
 </form>
 </div>
+
+</div>
+
+<div class="scaling-div" id="scalingDiv1">
+  <button class="close-button" id="closeScalingDiv1">Close</button>
+  <p>
+    "After another unexpected tumble into the enigmatic pit, our fearless traveler finds<br>
+    themselves in the heart of the Egyptian Era. Within the grand corridors of an ancient<br>
+    pyramid, they encounter an intellectual challenge - the Ancient Egyptian Number Series."<br><br>
+
+    Rules of the Ancient Egyptian Number Series:<br><br>
+
+1.Your task is to solve an Ancient Egyptian Number Series puzzle.<br>
+2.You will be presented with a sequence of numbers.<br>
+3.Your goal is to deduce the pattern behind the series and predict the next number.<br>
+4,Beware, you have only 5 attempts to crack the code and complete the sequence.<br>
+5.Can you unravel the mystery of the Egyptian Number Series in just 5 attempts and<br>
+escape the pyramid unscathed?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv1");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv1");
+  const scalingDiv = document.getElementById("scalingDiv1");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}

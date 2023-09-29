@@ -46,8 +46,8 @@ def Puz1():
     # Initialize wordle_data from the session if it exists
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 2:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 2:
+        #return redirect(url_for('views.home'))
     wordle_data = session.get(f'wordle_data {Username}', {
         'guesses': [],
         'word': Puzzle1.generate_random_word().upper(),
@@ -99,7 +99,7 @@ def Puz1():
             user.Attempts = 5
             db.session.commit()
         session.pop(f'wordle_data {Username}')
-        return redirect(url_for('views.home'))
+        #return redirect(url_for('views.home'))
     return render_template("Puz1.html", Username=Username, Guesses=Guesses, Result=Result, Lives=User.Lives)
 
 @views.route('/Puz2', methods=["POST", "GET"])
@@ -110,8 +110,8 @@ def Puz2():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 5:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 5:
+    #    return redirect(url_for('views.home'))
     user_data = session.get(f'numpat_data {Username}')
 
     if user_data is None:
@@ -168,8 +168,8 @@ def Puz3():
     Result = "Null"
     Username = current_user.Username
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 8:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 8:
+    #    return redirect(url_for('views.home'))
     usr_data = session.get(f'mgcsqr_data {Username}')
 
     if usr_data is None:
@@ -243,8 +243,8 @@ def Puz4():
     Username = current_user.Username
     usr_data = session.get(f'anagram_data {Username}')
     User = Active_Users.query.filter_by(Username=Username).first()
-    if User.Progress != 11:
-        return redirect(url_for('views.home'))
+    #if User.Progress != 11:
+    #    return redirect(url_for('views.home'))
     if usr_data is None:
         # Generate the puzzle if it hasn't been generated yet
         usr_data = {
@@ -253,7 +253,7 @@ def Puz4():
         session[f'anagram_data {Username}'] = usr_data
     Guesses = usr_data['puzzle']
     Word = Guesses[0]
-    Hint = Guesses[1]
+    Hint = Guesses[2]
     if request.method == "POST":
         if "Submit" in request.form:
             user = Active_Users.query.filter_by(Username = Username).first()

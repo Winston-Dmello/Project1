@@ -11,6 +11,7 @@
 
 {% block content %}
 <div class="block">
+<button id="openScalingDiv3">How To Play?</button>
 <h2><b><u>The Modern Era : JUMBLED WORD</u></b></h2>
 <br>
 <h4><b>Jumbled Word: {{Word}}</b></h4>
@@ -28,14 +29,59 @@
 </form>
 {% elif Result == "Success" %}
 <form method="post">
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">Congratulations!<br>You Move Forward</div>
     <div class="submit-button">
         <button name="Submit" class="submit">Submit</button>
     </div>
+    </div>
+  </div>
 </form>
 {% elif Result == "Failed" %}
 <form method="post">
-  <button name="Retry" class="submit">Retry</button>
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div class="sumit"><button name="Retry" class="submit">Retry</button>
+    </div>
+  </div>
+  </div>
 </form>
 {% endif %}
 </div>
+
+</div>
+
+<div class="scaling-div" id="scalingDiv3">
+  <button class="close-button" id="closeScalingDiv3">Close</button>
+  <p>
+    "Exasperated by the relentless pit's whims, our resolute traveler is hurled into the Modern<br>
+    Era. Amidst the bustling cityscape and technology, a new challenge awaits - the Modern Era<br>
+    Anagram Puzzle."<br><br>
+    
+    <u>Rules of the Modern Era Anagram Puzzle:</u><br><br>
+    1. Now in the heart of the Modern Era, you confront the Anagram Puzzle.<br>
+    2. You will be given a set of letters, jumbled and disordered.<br>
+    3. Your mission is to unscramble these letters and form a meaningful word.<br>
+    4. A hint or clue will be provided to guide your deciphering.<br>
+    5. You have 5 attempts to successfully solve the anagram and unveil the word.<br>
+    6. Can you embrace modern thinking and decode the Anagram Puzzle within 5 attempts to<br>
+    continue your extraordinary journey?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv3");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv3");
+  const scalingDiv = document.getElementById("scalingDiv3");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}
