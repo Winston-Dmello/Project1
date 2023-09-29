@@ -2,7 +2,7 @@
 *{    
   font-family: 'Montserrat', sans-serif;
 }
-p{
+#h4{
   color: whitesmoke;
 }
 
@@ -26,7 +26,7 @@ p{
 
 .content-table th,
 .content-table td {
-  padding: 12px 15px;
+  padding: 10px 12px;
 }
 
 .content-table tbody tr {
@@ -38,11 +38,21 @@ p{
 
 
 .content-table tbody tr:last-of-type {
-  border-bottom: 3px solid #009879;
+  border-bottom: 4px solid black;
 }
 
 .table{
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 0;
+}
+
+.text{
+  width: auto;
+  height: auto;
+  background-color: #4e6a7c;
+  text-align: center; 
+  padding: 20px;
+  margin-top: 5px;
 }
