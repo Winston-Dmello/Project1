@@ -76,7 +76,32 @@
 
 
 
-
+        <script>
+            var forms = document.querySelectorAll('form');
+            var submissionCounts = Array.from(forms).fill(0);
+            var maxSubmissions = 1; // Change this to your desired limit
+    
+            forms.forEach(function(form, formIndex) {
+                form.addEventListener('submit', function(event) {
+                    if (submissionCounts[formIndex] >= maxSubmissions) {
+                        // Prevent the form submission if the maximum number of submissions is reached
+                        event.preventDefault();
+                        alert('Please Wait!');
+                    } else {
+                        // Increment the submission count for this form
+                        submissionCounts[formIndex]++;
+                        // Disable all submit buttons in this form to prevent rapid submissions
+                        var buttons = form.querySelectorAll('button[type="submit"]');
+                        buttons.forEach(function(button) {
+                            button.disabled = true;
+                            // Optionally, you can add some visual indication that the button is disabled
+                            button.style.opacity = '0.6'; // Reduces opacity to visually indicate disabled state
+                        });
+                    }
+                });
+            });
+        </script>
+        
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

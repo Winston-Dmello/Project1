@@ -4,11 +4,9 @@ import enchant
 # Function to generate a random word from a list
 def generate_random_word():
     word_list = [
-        "Amber", "Arrow", "Bison", "Blade", "Caves", "Chief", "Clubs", "Dwell", "Flame", "Grass",
-        "Hunts", "Lodge", "Mound", "Music", "Rocks", "Skull", "Stone", "Swamp", "Wheel", "Woods",
-        "Abode", "Ashes", "Beads", "Blaze", "Forge", "Groan", "Knobs", "Lance", "Plume", "Shack",
-        "Skins", "Stilt", "Sworn", "Tribe", "Vines", "Woods", "Yarns", "Blaze", "Dunes", "Forge",
-        "Groan", "Lodge", "Paint", "Roost", "Shack", "Earth", "Stone", "Rocks", "Spear", "Water", "Wheat", "Crops", "Nomad"
+        "Arrow", "Caves", "Chief", "Flame", "Grass", "Hunts", "Rocks", "Skull", "Stone", "Swamp", "Wheel", "Woods",
+        "Skins", "Tribe", "Earth", "Spear", "Water", "Wheat", "Crops", "Nomad", "Fires", "Boars", "Bones",
+        "Flint", "Tools", "Knife", "Trees", "Boats"
     ] 
     return random.choice(word_list)
 
