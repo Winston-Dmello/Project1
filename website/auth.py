@@ -5,7 +5,7 @@ from . import *
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/', methods=['GET', 'POST'])
+@auth.route('/Login', methods=['GET', 'POST'])
 def Login():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
@@ -30,5 +30,9 @@ def Login():
 @auth.route('/Logout')
 @login_required
 def Logout():
+    Username = current_user.Username
+    User = Active_Users.query.filter_by(Username = Username).first()
+    db.session.delete(User)
+    db.session.commit()
     logout_user()
-    return redirect(url_for('auth.Login'))
+    return redirect(url_for('home.start'))

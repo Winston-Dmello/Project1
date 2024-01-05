@@ -16,11 +16,30 @@
             href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
             crossorigin="anonymous"
         />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ url_for('static', filename='Base/HomeAgain.css') }}">
         <title>{% block title %}HomePage{% endblock %}</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+        
     </head>
     <body>
-      {% with messages = get_flashed_messages(with_categories=true) %}
+        <div id="message">
+            <p>Please switch to landscape mode to play the game.</p>
+        </div>
+        
+        {% block content %}
+        <div class="block">
+            <div class="video-background">
+                <video autoplay muted>
+                    <source src="{{ url_for('static', filename='Base/video.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>    
+        </div>
+        {% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
                 {% if category == 'error' %}
@@ -41,31 +60,48 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        {% block content %}
-        <form method="post">
-        <div class="block">
-            <button class="pyramid-button" name="Puz1">
-              <img class="pyramid-img" src="{{ url_for('static', filename='Base/Pyramid1.png') }}">
-            </button>
-          
-            <button class="ooga-button" disabled>
-              <img class="ooga-img" src="{{ url_for('static', filename='Base/ooga1.png') }}">
-            </button>
-          
-            <button class="mona-button" disabled>
-              <img class="mona-img" src="{{ url_for('static', filename='Base/monalisa1.png') }}">
-            </button>
-          
-            <button class="building-button" disabled>
-              <img src="{{ url_for('static', filename='Base/building1.png') }}" alt="Modern" class="building-img">
-            </button>
-          
-            <button class="hole-button" disabled>
-              <img src="{{ url_for('static', filename='Base/hole2.png') }}" alt="Blackhole" class="hole-img">
-            </button>
-          </div>
-          </form>
-        {% endblock %}
+        <div class="table-container">
+            <table>
+                <tbody>
+                    {% if Lives %}
+                    <tr>
+                        <td style="vertical-align: bottom;">
+                            <img class="Lives" src="{{ url_for('static', filename='Base/Lives.png') }}">x{{Lives}} 
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <script>
+            var forms = document.querySelectorAll('form');
+            var submissionCounts = Array.from(forms).fill(0);
+            var maxSubmissions = 1; // Change this to your desired limit
+    
+            forms.forEach(function(form, formIndex) {
+                form.addEventListener('submit', function(event) {
+                    if (submissionCounts[formIndex] >= maxSubmissions) {
+                        // Prevent the form submission if the maximum number of submissions is reached
+                        event.preventDefault();
+                        alert('Please Wait!');
+                    } else {
+                        // Increment the submission count for this form
+                        submissionCounts[formIndex]++;
+                        // Disable all submit buttons in this form to prevent rapid submissions
+                        var buttons = form.querySelectorAll('button[type="submit"]');
+                        buttons.forEach(function(button) {
+                            button.disabled = true;
+                            // Optionally, you can add some visual indication that the button is disabled
+                            button.style.opacity = '0.6'; // Reduces opacity to visually indicate disabled state
+                        });
+                    }
+                });
+            });
+        </script>
+        
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -80,6 +116,6 @@
             src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
-        ></script>
+        ></script>    
     </body> 
 </html>

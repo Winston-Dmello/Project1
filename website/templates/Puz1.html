@@ -1,63 +1,20 @@
 {% extends "Base.html" %}
 
 {% block Head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='images/Puz1.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;300;500;600&family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-<style>
-    .block{
-      width: 75%;
-      height: 75%;
-      border: 1px solid whitesmoke;
-      border-radius: 13px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      display: flex;
-      flex-direction: column;
-      transform: translate(-50%,-50%);
-      padding: 10px;
-      justify-content: center;
-      align-items: center;
-      background-color:#353935;
-      opacity: 0.7;
-      box-shadow: -10px -10px 10px;
-    }
-        /* Define the grid container */
-        .label-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 columns */
-            gap: 10px; /* Spacing between labels */
-        }
-        
-        /* Style for individual labels (boxes) */
-        .label-box {
-          border: 1px solid #000; /* Minimal border */
-          padding: 10px; /* Padding inside each label */
-          text-align: center; /* Center text */
-          font: bold;
-          background-color: white;
-      }
-        .label-box-green {
-            border: 1px solid #000; /* Minimal border */
-            padding: 10px; /* Padding inside each label */
-            text-align: center; /* Center text */
-            background-color: green;
-            font: bold;
-        }
-        .label-box-yellow {
-          border: 1px solid #000; /* Minimal border */
-          padding: 10px; /* Padding inside each label */
-          text-align: center; /* Center text */
-          background-color: yellow;
-          font: bold;
-      }
-  </style>
 {% endblock %}
 {% block title %}CaveManEra{% endblock %}
 
 {% block content %}
 <div class="block">
-<h4>Welcome {{Username}}!, It's been so long</h4>
-
+<button id="openScalingDiv">How To Play?</button> <!-- Button to open scaling div -->
+<center>
+<h1 style="color: black; text-shadow: 3px 3px 3px blanchedalmond;"><b>The Wordle: Puzzle of the Ancients</b></h1></center>
 
     <!-- Grid container for labels -->
     <div class="label-grid"> 
@@ -76,17 +33,70 @@
 
 {% if Result == "Null" %}
 <form method="post">
-    <input type="text" name="Guess">
-    <button name="Try">Try</button>
+    <div id="parent">
+      <div id="input-field">
+        <input type="text" required="required" name="Guess" placeholder="Answer">
+        
+      </div>
+      <button name="Try" class="Check">check</button>
+    </div>
+    
 </form>
 {% elif Result == "Success"%}
 <form method="post">
-    <button name="Submit">Submit</button>
+  <div class="Popup">
+    <div class="Message">
+      <div>
+      <div class="msg">Congratulations!<br>You Move Forward</div>
+    <div class="sumit"><button name="Submit" class="submit">Submit</button></div>
+    </div>
+  </div>
+    </div>
 </form>
 {% elif Result == "Failed" %}
 <form method="post">
-  <button name="Back">Back</button>
+  <div class="Popup">
+  <div class="Message">
+    
+    <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div class="sumit"><button name="Retry" class="retry">Retry</button>
+  </div>
+</div>
+  </div>
 </form>
 {% endif %}
 </div>
+
+<div class="scaling-div" id="scalingDiv">
+  <button class="close-button" id="closeScalingDiv">Close</button>
+  <p><br>
+    "After falling into the mysterious pit known as the 'Mosh Pit', the protagonist finds themselves<br>
+    transported back in time to the Cave Man Era. As they venture deeper into this primitive<br>
+      world, they stumble upon a dark cave entrance. With a curious spirit, they step inside, only to<br>
+      discover a challenging test waiting for them - the Wordle Puzzle of the Ancients."<br>
+    <br>
+    <u>Rules of Wordle (Cave Man Era Edition):</u><br><br>
+    1. You have 5 attempts to guess a valid five-letter word connected to the stone age.<br>
+    2. The colour of tile will change depending on how close your guess was to the word:<br>
+      - A letter turns green if it's in the correct position.<br>
+       - A letter turns yellow if it's in the secret word but<br>in the wrong position.<br>
+      - A letter remains white if it's not in the secret word.<br>
+    3. Your task is to decipher the ancient word with logic and wit.<br><br>
+    Can you crack the code and unlock the secrets of the Cave Man Era?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv");
+  const scalingDiv = document.getElementById("scalingDiv");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}

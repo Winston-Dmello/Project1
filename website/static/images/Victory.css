@@ -1,0 +1,86 @@
+
+*{    
+  font-family: 'Montserrat', sans-serif;
+}
+#h4{
+  color: whitesmoke;
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 1.2em;
+  min-width: 400px;
+  border-radius: 10px 10px ;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: black;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  border: none;
+}
+
+.content-table th,
+.content-table td {
+  padding: 10px 12px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: #36454F;
+  color: #ffffff;
+}
+
+
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 4px solid black;
+}
+
+.table{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+}
+
+.text{
+  width: auto;
+  height: auto;
+  background-color: #4e6a7c;
+  text-align: center; 
+  padding: 20px;
+  margin-top: 5px;
+}
+
+.submit{
+  padding: 0.8vw;
+  border: 1px solid black;
+  font-size:1.5vw;
+  color: whitesmoke;
+  background-color: #4e6a7c;
+  border-radius: 13px;
+  margin-top: 1.6vw;
+  font-weight: bold;
+  transition: transform 0.4s;
+}
+.submit:hover{
+  transform: scale(1.1);
+}
+.replay{
+  display: flex;
+  width: 100%;
+  height:auto;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+body{
+  background-image: url('Base1.png');
+  background-size: cover;
+}

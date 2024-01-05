@@ -3,7 +3,11 @@ import enchant
 
 # Function to generate a random word from a list
 def generate_random_word():
-    word_list = ["dates", "space", "clock", "quant", "loops", "pulse", "timer", "speed", "sonic", "light", "stars", "sound", "watch", "visit", "storm", "crash", "shift", "glide"]
+    word_list = [
+        "Arrow", "Caves", "Chief", "Flame", "Grass", "Hunts", "Rocks", "Skull", "Stone", "Swamp", "Wheel", "Woods",
+        "Skins", "Tribe", "Earth", "Spear", "Water", "Wheat", "Crops", "Nomad", "Fires", "Boars", "Bones",
+        "Flint", "Tools", "Knife", "Trees", "Boats"
+    ] 
     return random.choice(word_list)
 
 # Function to check if a word is valid using enchant
@@ -13,24 +17,23 @@ def is_valid_word(word):
 
 # Function to play the Wordle game and return feedback as a string
 def play_wordle(secret_word, guessed_word):
-    feedback = ""
+    secret_list = list(secret_word)
+    guessed_list = list(guessed_word)
+    feedback = ["_"] * len(secret_list)
 
-    # Count occurrences of each letter in secret_word
-    secret_letter_count = {}
-    for letter in secret_word:
-        if letter != ' ':
-            secret_letter_count[letter] = secret_letter_count.get(letter, 0) + 1
+    for i in range(len(guessed_list)):
+        if guessed_list[i] == secret_list[i]:
+            feedback[i] = "*"
+            secret_list[i] = guessed_list[i] = None  # Mark the matched letters
 
-    for i in range(len(secret_word)):
-        if secret_word[i] == guessed_word[i]:
-            feedback += "*"  # Char is in the correct position
-        elif guessed_word[i] in secret_letter_count and secret_letter_count[guessed_word[i]] > 0:
-            feedback += "x"  # Char is in the word but not in the correct position
-            secret_letter_count[guessed_word[i]] -= 1
-        else:
-            feedback += "_"  # Char is not present in the word
+    for i in range(len(guessed_list)):
+        if guessed_list[i] in secret_list and guessed_list[i]!=None:
+            feedback[i] = "x"
+            matched_index = secret_list.index(guessed_list[i])
+            secret_list[matched_index] = guessed_list[i] = None  # Mark the matched letters
 
-    return feedback
+    return "".join(feedback)
+
 
 
 # Function to check if a guessed word is correct

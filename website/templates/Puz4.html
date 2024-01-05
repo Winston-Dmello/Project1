@@ -3,44 +3,88 @@
 {% block title %}ModernEra{% endblock %}
 
 {% block Head %}
-<style>
-    .block{
-        width: 75%;
-        height: 75%;
-        border: 1px solid whitesmoke;
-        border-radius: 13px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: flex;
-        flex-direction: column;
-        transform: translate(-50%,-50%);
-        padding: 10px;
-        justify-content: center;
-        align-items: center;
-        background-color:white;
-        /*opacity: 0.7;*/
-        box-shadow: -10px -10px 10px;
-      }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='images/Puz4.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Acme&family=Gabarito:wght@600&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <div class="block">
-<h1>Welcome {{Username}}, To the Modern Era</h1>
+<button id="openScalingDiv3">How To Play?</button>
+<h1 style="color: black; text-shadow: 3px 3px 3px rgb(197, 190, 190);"><b>The Modern Era:
+  Anagram Puzzle</b></h1>
 <br>
-<h3>Jumbled Word: {{Word}}</h3>
-<br>
-<h3>{{Hint}}</h3>
+<h4 style="color: black; text-shadow: 3px 3px 3px rgb(117, 104, 104);"><b>Jumbled Word: {{Word}}</b></h4>
+
+<h5 style="color: black; text-shadow: 2px 2px 2px  rgb(117, 104, 104);"><b>Hint: {{Hint}}</b></h5>
 {% if Result == "Null" %}
 <form method="post">
-    <input type="text" name="Guess">
-    <button name="Try">Try</button>
+    <div class="text-div">
+    <input type="text" name="Guess" class="text-box" placeholder="Answer">
+    </div>
+    <div class="button-div">
+     <button name="Try" class="Check">Check</button>
+    </div>
+    
 </form>
 {% elif Result == "Success" %}
 <form method="post">
-    <button name="Submit">Submit</button>
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">Congratulations!<br>You Move Forward</div>
+    <div class="submit-button">
+        <button name="Submit" class="submit">Submit</button>
+    </div>
+    </div>
+  </div>
+</form>
+{% elif Result == "Failed" %}
+<form method="post">
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div class="sumit"><button name="Retry" class="submit">Retry</button>
+    </div>
+  </div>
+  </div>
 </form>
 {% endif %}
 </div>
+
+</div>
+
+<div class="scaling-div" id="scalingDiv3">
+  <button class="close-button" id="closeScalingDiv3">Close</button>
+  <p>
+    "Devastated by the relentless pit's whims, the protagonist is hurled into the Modern<br>
+    Era. Amidst the bustling cityscape and technology, a new challenge awaits - the Modern Era<br>
+    Anagram Puzzle."<br><br>
+    
+    <u>Rules of the Modern Era Anagram Puzzle:</u><br><br>
+    1. You will be given a set of letters, jumbled and disordered.<br>
+    2. Your mission is to unscramble these letters and form a meaningful word.<br>
+    3. A hint or clue will be provided to guide your deciphering.<br>
+    4. You have 5 attempts to successfully solve the anagram and unveil the word.<br>
+   <br>Can you embrace modern thinking and decode the Anagram Puzzle?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv3");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv3");
+  const scalingDiv = document.getElementById("scalingDiv3");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}

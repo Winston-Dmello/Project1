@@ -56,5 +56,5 @@ def check_magic_sq(array):
 
     return diag1_sum == magic_const and diag2_sum == magic_const
 
-print(generate_magic_square())
+#print(generate_magic_square())
 #print(check_magic_sq([[8,1,6,3,5,7,4,9,2],15]))

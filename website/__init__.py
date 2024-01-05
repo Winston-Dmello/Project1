@@ -15,9 +15,13 @@ def create_app():
 
     from .views import views
     from .auth import auth
+    from .scenes import scenes
+    from .home import home
 
+    app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(scenes, url_prefix='/')
 
     from .models import Winners, Active_Users
 

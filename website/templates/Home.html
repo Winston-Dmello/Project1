@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Home/Home.css') }}">
+</head>
+<body>
+  <div id="message">
+    <p>Please switch to landscape mode to play the game.</p>
+</div>
+
+ <div class="block">
+  <div class="img-parent">
+    <form method="post">
+  <button class="start-button" name="Start">
+    <img class="start-img" src="{{ url_for('static', filename='Home/start_button.png') }}">
+  </button>
+</form>
+</div>
+ </div>   
+
+  
+</body>
+</html>

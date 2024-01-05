@@ -2,34 +2,21 @@
 
 {% block title %}RenaissanceEra{% endblock %}
 {% block Head %}
-<style>
-    .block{
-        width: 75%;
-        height: 75%;
-        border: 1px solid whitesmoke;
-        border-radius: 13px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: flex;
-        flex-direction: column;
-        transform: translate(-50%,-50%);
-        padding: 10px;
-        justify-content: center;
-        align-items: center;
-        background-color:white;
-        /*opacity: 0.7;*/
-        box-shadow: -10px -10px 10px;
-      }
-</style>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='images/Puz3.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100;300;500;600&family=Montserrat:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 {% endblock %}
 {% block content %}
 <div class="block">
-<h1>Welcome {{Username}}, To the Renaissance Era</h1>
+<button id="openScalingDiv2">How To Play?</button>
+<h1 style="color: black; text-shadow: 3px 3px 3px blanchedalmond;">The Renaissance Magic Square Puzzle</h1>
 
-<h3>Generate a Magic Square, where sum is {{Num[1]}}<br>Given Numbers: 
+<center><b><h5 style="color: black; text-shadow: 2px 2px 2px  rgb(117, 104, 104);">Magical Sum: {{Num[1]}}<br>Given Numbers: 
 {% for i in Num[0] %}
-{{i}} {% endfor %}</h3>
+{{i}} {% endfor %}</h5></b></center>
 {% if Result == "Null"%}
 <form method="post">
 <table>
@@ -50,12 +37,63 @@
     </tr>
 </table>
 
-<button name="Try">Try</button>
+<button name="Try" class="check">Check</button>
 </form>
 {% elif Result == "Success" %}
 <form method="post">
-    <button name="Submit">Submit</button>
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">Congratulation!<br>You Move Forward</div>
+    <div class="sumit"><button name="Submit" class="submit">Submit</button>
+    </div>
+  </div>
+  </div>
+</form>
+{% elif Result == "Failed" %}
+<form method="post">
+  <div class="Popup">
+    <div class="Message">
+      <div class="msg">You Have Lost A Life!!<br>Be Careful</div>
+  <div class="sumit"><button name="Retry" class="submit">Retry</button>
+    </div>
+  </div>
+  </div>
 </form>
 {% endif %}
 </div>
+
+</div>
+
+<div class="scaling-div" id="scalingDiv2">
+  <button class="close-button" id="closeScalingDiv2">Close</button>
+  <p>
+"In the vibrant Renaissance Era, the protagonist embarks on yet another journey after a<br>
+harrowing fall into the mystical pit. Now, within a chamber adorned with the wonders of art<br>
+and knowledge, they are faced with an engaging challenge - the Renaissance Magic Square Puzzle."<br><br>
+
+<u>Rules of the Renaissance Magic Square Puzzle:</u><br><br>
+
+1. A 3x3 matrix is presented to you, a grid with nine cells.<br>
+2. Your task is to place the given numbers into the cells,<br> ensuring the sum of each
+row, column, and diagonal matches the<br>specified magical sum.<br>
+3. The numbers and the magical sum are provided as clues to guide you.<br>
+4. With only 5 attempts, you must arrange the numbers within the grid to<br>achieve
+the desired magical sum.<br><br>
+ Can you tap into the Renaissance spirit and master the Magic Square Puzzle<br> and continue your extraordinary journey?</p>
+</div>
+
+<script>
+  // JavaScript to handle the opening and closing of the scaling div
+  const openScalingDivButton = document.getElementById("openScalingDiv2");
+  const closeScalingDivButton = document.getElementById("closeScalingDiv2");
+  const scalingDiv = document.getElementById("scalingDiv2");
+
+  openScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "flex"; // Show the scaling div
+  });
+
+  closeScalingDivButton.addEventListener("click", function () {
+    scalingDiv.style.display = "none"; // Hide the scaling div
+  });
+</script>
 {% endblock %}
