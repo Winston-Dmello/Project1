@@ -2,4 +2,3 @@ Flask
 flask_login
 flask_sqlalchemy
 pyenchant
-libenchant
