@@ -1,7 +1,4 @@
-list of required Libraries
-
 Flask
 flask_login
 flask_sqlalchemy
 pyenchant
-waitress
